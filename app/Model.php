@@ -16,4 +16,6 @@ class Model extends ModelBase
             $model->{$model->getKeyName()} = (string) Str::uuid();
         });
     }
+
+    protected $guarded = [];
 }
