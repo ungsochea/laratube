@@ -60,6 +60,7 @@
                                </g>
                                </svg>
                                 </div>
+                                <img src="{{ $channel->image() }}" alt="pf">
                             </div>
                         </div>
                         <input onchange="document.getElementById('update-channel-form').submit()" style="display:none;" type="file" id="image" name="image">
