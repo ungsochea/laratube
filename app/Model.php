@@ -1,21 +1,26 @@
 <?php
-
 namespace Laratube;
-
 use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Model as ModelBase;
-
-class Model extends ModelBase
+use Illuminate\Database\Eloquent\Model as BaseModel;
+class Model extends BaseModel
 {
-    public $increment = false;
-
-    protected static function boot(){
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+    protected $guarded = [];
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
         parent::boot();
-
-        static::creating(function ($model){
+        static::creating(function ($model) {
             $model->{$model->getKeyName()} = (string) Str::uuid();
         });
     }
-
-    protected $guarded = [];
 }
