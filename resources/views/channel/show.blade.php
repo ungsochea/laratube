@@ -8,15 +8,18 @@
                 <div class="card-header">{{ $channel->name }}</div>
 
                 <div class="card-body">
+                        @if ($channel->editable())
                     <form id="update-channel-form" action="{{ route('channels.update',$channel->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
+                        @endif
                         <div class="form-group row justify-content-center" onclick="document.getElementById('image').click()">
                             <div class="channel-avatar">
+                                @if ($channel->editable())
                                 <div class="channel-avatar-overlay">
                                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                     viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve">
-                               <g>
+                                    <g>
                                    <path d="M55.201,15.5h-8.524l-4-10H17.323l-4,10H12v-5H6v5H4.799C2.152,15.5,0,17.652,0,20.299v29.368
                                        C0,52.332,2.168,54.5,4.833,54.5h50.334c2.665,0,4.833-2.168,4.833-4.833V20.299C60,17.652,57.848,15.5,55.201,15.5z M8,12.5h2v3H8
                                        V12.5z M58,49.667c0,1.563-1.271,2.833-2.833,2.833H4.833C3.271,52.5,2,51.229,2,49.667V20.299C2,18.756,3.256,17.5,4.799,17.5H6h6
@@ -60,10 +63,23 @@
                                </g>
                                </svg>
                                 </div>
+                                @endif
                                 <img src="{{ $channel->image() }}" alt="pf">
                             </div>
                         </div>
                         <input onchange="document.getElementById('update-channel-form').submit()" style="display:none;" type="file" id="image" name="image">
+                        
+                        <div class="form-group">
+                            <h4 class="text-center">
+                                {{ $channel->name }}
+                            </h4>
+                            <p class="text-center">
+                                {{ $channel->description }}
+                            </p>
+                        </div>
+
+                        @if ($channel->editable())
+                        
                         <div class="form-group">
                             <label for="name" class="form-control-lable">
                                 Name
@@ -76,10 +92,23 @@
                             </label>
                             <textarea name="description" id="description" rows="3" class="form-control">{{ $channel->description }}</textarea>
                         </div>
+                        @if ($errors->any())
+                            <ul class="list-group mb-5">
+                                @foreach($errors->all() as $error)
+                                    <li class="text-danger list-group-item">
+                                        {{ $error }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
                         <button type="submit" class="btn btn-info">
                             Update Channel
                         </button>
+                        @endif
+                        
+                        @if ($channel->editable())
                     </form>
+                    @endif
                 </div>
             </div>
         </div>
