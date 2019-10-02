@@ -3,9 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        <channel-uploads inline-template>
         <div class="col-md-8">
-            <div class="card p-3 d-flex justify-content-center align-items-center">
-                <svg width="70px" height="70px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            <div class="card p-3 d-flex justify-content-center align-items-center" v-if="!selected">
+                <svg onclick="document.getElementById('video-files').click()" width="70px" height="70px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 461.001 461.001" style="enable-background:new 0 0 461.001 461.001;" xml:space="preserve">
                <path style="fill:#F61C0D;" d="M365.257,67.393H95.744C42.866,67.393,0,110.259,0,163.137v134.728
                    c0,52.878,42.866,95.744,95.744,95.744h269.513c52.878,0,95.744-42.866,95.744-95.744V163.137
@@ -42,10 +43,16 @@
                <g>
                </g>
                </svg>
+
+                <input type="file" id="video-files" style="display:none" ref="videos" @change="upload">
                <p class="text-center">Upload Videos</p>
                
             </div>
+            <div class="card p-3" v-else>
+
+            </div>
         </div>
+        </channel-uploads>
     </div>
 </div>
 @endsection
