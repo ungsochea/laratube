@@ -1,3 +1,5 @@
+import numeral from 'numeral'
+
 Vue.component('subscribe-button',{
     props:{
         channel:{
@@ -21,6 +23,9 @@ Vue.component('subscribe-button',{
         owner(){
             if(__auth() && this.channel.user_id == __auth().id) return true
             return false
+        },
+        count(){
+            return numeral(this.subscriptions.length).format('0a')
         }
     },
     methods: {
