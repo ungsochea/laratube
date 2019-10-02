@@ -76,6 +76,11 @@
                             <p class="text-center">
                                 {{ $channel->description }}
                             </p>
+                            <div class="text-center">
+                                <div class="btn btn-danger">
+                                    Subscribe 7K
+                                </div>
+                            </div>
                         </div>
 
                         @if ($channel->editable())
@@ -105,7 +110,7 @@
                             Update Channel
                         </button>
                         @endif
-                        
+
                         @if ($channel->editable())
                     </form>
                     @endif
